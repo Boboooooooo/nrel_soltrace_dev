@@ -24,7 +24,7 @@ endif()
 #####################################################################################################################
 set(CORETRACEDIR ${CMAKE_CURRENT_SOURCE_DIR}/../coretrace)
 
-include_directories(. ${CORETRACEDIR} $ENV{WEXDIR}/include $ENV{LKDIR}/include )
+include_directories(. ${CORETRACEDIR} $ENV{WEXDIR_EX}/include  $ENV{SSCDIR_EX} $ENV{LKDIR_EX}/include )
 
 set(SOLTRACE_SRC
 	src/console.cpp
@@ -95,7 +95,7 @@ if (UNIX)
 	set(wxWidgets_CONFIG_EXECUTABLE /usr/local/bin/wx-config-3)
 	find_package(wxWidgets COMPONENTS qa aui richtext html propgrid adv net stc core xml base REQUIRED)
 else()
-	set(wxWidgets_ROOT_DIR $ENV{WXMSW3})
+	set(wxWidgets_ROOT_DIR $ENV{WXMSW3_EX})
 	find_package(wxWidgets COMPONENTS qa webview aui richtext html propgrid adv net stc core xml base scintilla REQUIRED)
 endif()
 
@@ -161,7 +161,7 @@ if (UNIX)
 elseif (MSVC)
 	find_library( CURL_LIB
 			NAMES libcurl.lib
-			PATHS $ENV{WEXDIR}/build_resources/libcurl_ssl_x64/lib)
+			PATHS $ENV{WEXDIR_EX}/build_resources/libcurl_ssl_x64/lib)
 	target_link_libraries(SolTrace ${CURL_LIB})
 	target_link_libraries(SolTrace Winhttp)
 endif()
@@ -191,7 +191,7 @@ if (MSVC)
 		TARGET SolTrace
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND}
-		ARGS -E copy $ENV{WEXDIR}/build_resources/libcurl_ssl_x64/bin/${file_i} ${SOLTRACE_DIR}
+		ARGS -E copy $ENV{WEXDIR_EX}/build_resources/libcurl_ssl_x64/bin/${file_i} ${SOLTRACE_DIR}
 	)
 	endforeach( file_i )
 endif()

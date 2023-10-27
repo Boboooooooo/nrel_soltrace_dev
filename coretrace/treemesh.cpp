@@ -217,16 +217,13 @@ st_tree_node *st_tree_node::m_proc(string &key, int index){
 
     */
 
-	char c;
-	try
-	{
-		c = key.at(index);
-	}
-	catch(...){
-		return this;
-	}
-    if(terminal)
+    if (index >= key.size())
         return this;
+
+    if (terminal)
+        return this;
+
+	char c = key.at(index);
     switch (c)
     {
     case 't':
